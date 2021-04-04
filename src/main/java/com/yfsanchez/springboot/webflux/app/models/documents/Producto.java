@@ -37,6 +37,14 @@ public class Producto {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	public Producto() {
+		
+	}
+	public Producto(String nombre, Double precio) {
+		this.nombre = nombre;
+		this.precio = precio;
+	}
+	
 	
 	
 }
