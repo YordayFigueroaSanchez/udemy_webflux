@@ -51,5 +51,21 @@ public class ProductoContoller {
 		
 		return "listar";
 	} 
+	
+	@GetMapping({"/listar-full"})
+	public String listarFull(Model model) {
+		Flux<Producto> productos = productoDao.findAll()
+				.map(producto -> {
+					producto.setNombre(producto.getNombre().toUpperCase());
+					return producto;
+				})
+				.repeat(4000);
+		
+		
+		model.addAttribute("productos", productos);
+		model.addAttribute("titulo", "Lista en Flux");
+		
+		return "listar";
+	} 
 
 }
