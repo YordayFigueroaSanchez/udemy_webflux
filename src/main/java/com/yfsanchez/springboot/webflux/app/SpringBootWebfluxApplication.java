@@ -1,5 +1,7 @@
 package com.yfsanchez.springboot.webflux.app;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,10 @@ public class SpringBootWebfluxApplication implements CommandLineRunner{
 				new Producto("Product08",800.88),
 				new Producto("Product09",900.99)
 				)
-		.flatMap(producto -> dao.save(producto))
+		.flatMap(producto -> {
+			producto.setCreateAt(new Date());
+			return dao.save(producto);
+			})
 		.subscribe(producto -> log.info("Insert "+ producto.getId()+" " + producto.getNombre()));
 		
 	}
